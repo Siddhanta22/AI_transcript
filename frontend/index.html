@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Super AI Transcript</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero">
+        <h1>Super AI Transcript</h1>
+        <p>Record audio or upload a file to transcribe with AI</p>
+      </header>
+
+      <section class="card record-card">
+        <button id="recordBtn" class="primary">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="label">Start Recording</span>
+        </button>
+        <p class="muted">Hold "V" key to record</p>
+        <div id="recordStatus" class="status" role="status"></div>
+      </section>
+
+      <div class="divider">OR</div>
+
+      <section class="card upload-card">
+        <label class="upload-box" for="fileInput">
+          <input
+            id="fileInput"
+            type="file"
+            accept="audio/*"
+            aria-label="Upload audio file"
+          />
+          <div class="upload-title">Upload Audio File</div>
+          <div class="upload-subtitle">Drag and drop or click to browse</div>
+          <div class="upload-formats">MP3, WAV, M4A, WebM, OGG</div>
+        </label>
+      </section>
+
+      <div class="divider">OR</div>
+
+      <section class="card">
+        <h2>Paste Text Transcript</h2>
+        <textarea
+          id="textInput"
+          placeholder="Paste your transcript here..."
+        ></textarea>
+        <button id="processTextBtn" class="secondary">Process Text</button>
+      </section>
+
+      <section class="card">
+        <h2>System Prompt</h2>
+        <textarea id="systemPrompt"></textarea>
+      </section>
+
+      <section class="card">
+        <h2>Original Transcription</h2>
+        <textarea id="originalOutput" readonly></textarea>
+      </section>
+
+      <section class="card">
+        <h2>Cleaned Transcription</h2>
+        <textarea id="cleanedOutput" readonly></textarea>
+        <button id="copyBtn" class="ghost">Copy</button>
+      </section>
+    </main>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
