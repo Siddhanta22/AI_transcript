@@ -1,14 +1,10 @@
 const API_BASE = window.API_BASE || "http://localhost:8000";
 
-const DEFAULT_PROMPT =
-  'Return ONLY the cleaned text with NO preamble.\n\nExample:\nInput: "um so like I was thinking, you know, maybe we could, uh, create a function that, um, basically does the calculations, right?"\nOutput: "I think we should create a function that does the calculations."';
-
 const recordBtn = document.getElementById("recordBtn");
 const recordStatus = document.getElementById("recordStatus");
 const fileInput = document.getElementById("fileInput");
 const textInput = document.getElementById("textInput");
 const processTextBtn = document.getElementById("processTextBtn");
-const systemPrompt = document.getElementById("systemPrompt");
 const originalOutput = document.getElementById("originalOutput");
 const cleanedOutput = document.getElementById("cleanedOutput");
 const copyBtn = document.getElementById("copyBtn");
@@ -18,8 +14,6 @@ let mediaStream = null;
 let chunks = [];
 let isRecording = false;
 let recordingMimeType = "";
-
-systemPrompt.value = DEFAULT_PROMPT;
 
 function setStatus(message, isError = false) {
   recordStatus.textContent = message;
@@ -153,10 +147,7 @@ async function cleanText(text) {
     const response = await fetch(`${API_BASE}/clean`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        text,
-        system_prompt: systemPrompt.value.trim(),
-      }),
+      body: JSON.stringify({ text }),
     });
 
     if (!response.ok) {

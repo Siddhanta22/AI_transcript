@@ -1,6 +1,5 @@
 import os
 import tempfile
-from typing import Optional
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, File, HTTPException, UploadFile
@@ -39,7 +38,6 @@ app.add_middleware(
 
 class CleanRequest(BaseModel):
     text: str
-    system_prompt: Optional[str] = None
 
 
 def get_openai_client() -> OpenAI:
@@ -97,7 +95,7 @@ async def clean_transcript(payload: CleanRequest) -> dict:
         raise HTTPException(status_code=400, detail="Text is empty.")
 
     try:
-        system_prompt = payload.system_prompt or DEFAULT_SYSTEM_PROMPT
+        system_prompt = DEFAULT_SYSTEM_PROMPT
         response = client.chat.completions.create(
             model=CLEAN_MODEL,
             messages=[
